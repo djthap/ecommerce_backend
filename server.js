@@ -7,7 +7,7 @@ const extraPriceRoutes = require('./routes/extrapriceRoutes');
 
 const app = express();
 
-// Connect to Database
+
 connectDB();
 
 // Middleware
