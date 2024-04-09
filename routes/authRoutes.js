@@ -13,6 +13,7 @@ router.post('/register', registerValidator, authController.registerUser);
 router.post('/admin/login', loginValidator, authController.adminLogin);
 router.post('/admin/register', registerValidator, authController.adminRegister);
 router.put('/editRole/:userId', authController.editUserRole);
+router.put('/updateProfile/:userId', authController.updateUserProfile);
 
 
 module.exports = router;

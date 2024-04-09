@@ -3,8 +3,8 @@ const { MenuItem, ExtraPrice } = require('../models/menuItem');
 const createExtraPrice = async (req, res) => {
     try {
 
-        const { name, price } = req.body;
-        const extraPrice = new ExtraPrice({ name, price });
+        const { name, price ,display} = req.body;
+        const extraPrice = new ExtraPrice({ name, price ,display });
         await extraPrice.save();
         res.status(200).json(extraPrice);
     } catch (error) {
@@ -16,8 +16,8 @@ const createExtraPrice = async (req, res) => {
 const updateExtraPrice = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, price } = req.body;
-        const extraPrice = await ExtraPrice.findByIdAndUpdate(id, { name, price }, { new: true });
+        const { name, price ,display} = req.body;
+        const extraPrice = await ExtraPrice.findByIdAndUpdate(id, { name, price,display }, { new: true });
         if (!extraPrice) {
             return res.status(404).json({ message: 'ExtraPrice not found' });
         }

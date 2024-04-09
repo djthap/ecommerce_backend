@@ -206,6 +206,36 @@ const adminRegister = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+const updateUserProfile = async (req, res) => {
+  const { name, password, streetAddress, postalCode, image, city, country, phone } = req.body;
+  const { userId } = req.params;
+
+  try {
+    // Find the user by ID
+    let user = await User.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update user's profile
+    user.name = name;
+    user.password = password; // You may want to hash the password again before saving
+    user.streetAddress = streetAddress;
+    user.postalCode = postalCode;
+    user.image = image;
+    user.city = city;
+    user.country = country;
+    user.phone = phone;
+    await user.save();
+
+    res.status(200).json({ message: 'User profile updated successfully', user });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
 
 module.exports = {
   loginUser,
@@ -213,5 +243,6 @@ module.exports = {
   adminLogin,
   adminRegister,
   getUser,
+  updateUserProfile,
   editUserRole
 };

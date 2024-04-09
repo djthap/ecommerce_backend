@@ -60,7 +60,7 @@ const getAllMenuItems = async (req, res) => {
 const getRandomMenuItems = async (req, res) => {
 	try {
 		const randomMenuItems = await MenuItem.aggregate([
-			{ $sample: { size: 4 } },
+			{ $sample: { size: 5 } },
 		])
 
 		res.status(200).json(randomMenuItems)
@@ -205,8 +205,21 @@ const getMenuItemById = async (req, res) => {
 		res.status(500).json({ error: 'Internal server error' })
 	}
 }
+const searchMenuItemsByName = async (req, res) => {
+    try {
+        const { name } = req.query;
+       const menuItems = await MenuItem.find({ name: { $regex: new RegExp(name, "i") } })
+            .populate('category', 'category_name')
+            .populate('sizes', 'name price')
+            .populate('extraIngredientPrices', 'name price')
+            .populate('createdBy', 'name');
+        res.status(200).json(menuItems);
+    } catch (error) {
+        console.error('Error searching menu items by name:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
-// Exporting controller methods
 module.exports = {
 	getAllMenuItems,
 	createMenuItem,
@@ -215,5 +228,6 @@ module.exports = {
 	getMenuItemById,
 	getRandomMenuItems,
 	uploadImage,
-	getMenuItemsByCategory
+	getMenuItemsByCategory,
+	searchMenuItemsByName
 }

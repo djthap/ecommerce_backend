@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const ExtraPriceSchema = new Schema({
     name: String,
     price: Number,
+    display:String,
 });
 
 // Define MenuItemSchema
