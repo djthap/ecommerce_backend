@@ -236,7 +236,15 @@ const updateUserProfile = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
-
+const getRestaurantUsers = async (req, res) => {
+  try {
+    const restaurantUsers = await User.find({ role: 'Restaurant' });
+    res.status(200).json(restaurantUsers);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+};
 module.exports = {
   loginUser,
   registerUser,
@@ -244,5 +252,6 @@ module.exports = {
   adminRegister,
   getUser,
   updateUserProfile,
-  editUserRole
+  editUserRole,
+  getRestaurantUsers
 };

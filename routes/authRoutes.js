@@ -9,6 +9,7 @@ const registerValidator = require('../validators/registerValidator');
 
 router.post('/login', loginValidator, authController.loginUser);
 router.get('/getAllUsers',  authController.getUser);
+router.get('/restaurants', authController.getRestaurantUsers);
 router.post('/register', registerValidator, authController.registerUser);
 router.post('/admin/login', loginValidator, authController.adminLogin);
 router.post('/admin/register', registerValidator, authController.adminRegister);
