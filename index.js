@@ -32,7 +32,7 @@ app.use(
         credentials: true,
     })
 )
-// Routes
+// Route
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/menuItem', menuItemRoutes);
