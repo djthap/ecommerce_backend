@@ -1,32 +1,37 @@
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./db');
-const authRoutes = require('./routes/authRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const menuItemRoutes = require('./routes/menuItemRoutes');
-const extraPriceRoutes = require('./routes/extrapriceRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-const contactUsRoutes = require('./routes/contactUsRoutes');
+const express = require('express')
+const cors = require('cors')
+const connectDB = require('./db')
+const authRoutes = require('./routes/authRoutes')
+const categoryRoutes = require('./routes/categoryRoutes')
+const menuItemRoutes = require('./routes/menuItemRoutes')
+const extraPriceRoutes = require('./routes/extrapriceRoutes')
+const orderRoutes = require('./routes/orderRoutes')
+const contactUsRoutes = require('./routes/contactUsRoutes')
 
-const app = express();
+const app = express()
 
 // Connect to Database
-connectDB();
+connectDB()
 
 // Middleware
-app.use(express.json());
+app.use(express.json())
 
-app.use(cors({
-    origin: 'https://ecommerce-frontend-amber-two.vercel.app'
-  }));
+app.use(
+	cors({
+		origin: 'https://ecommerce-frontend-amber-two.vercel.app',
+		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+		preflightContinue: false,
+		optionsSuccessStatus: 204,
+	})
+)
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/categories', categoryRoutes);
-app.use('/api/menuItem', menuItemRoutes);
-app.use('/api/extraPrice', extraPriceRoutes);
-app.use('/api/orderRoutes', orderRoutes);
-app.use('/api/contactUsRoutes', contactUsRoutes);
+app.use('/api/auth', authRoutes)
+app.use('/api/categories', categoryRoutes)
+app.use('/api/menuItem', menuItemRoutes)
+app.use('/api/extraPrice', extraPriceRoutes)
+app.use('/api/orderRoutes', orderRoutes)
+app.use('/api/contactUsRoutes', contactUsRoutes)
 
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5002
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
