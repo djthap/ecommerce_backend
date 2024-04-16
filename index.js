@@ -16,22 +16,9 @@ connectDB();
 // Middleware
 app.use(express.json());
 
-app.use(
-    cors({
-        origin: 'https://ecommerce-frontend-amber-two.vercel.app/',
-        optionsSuccessStatus: 200,
-        allowedOrigins: ["https://ecommerce-frontend-amber-two.vercel.app/"],
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-        allowedHeaders: [
-            'Content-Type',
-            'Authorization',
-            'Access-Control-Allow-Origin',
-            'Access-Control-Allow-Methods',
-            'Access-Control-Allow-Headers',
-        ],
-        credentials: true,
-    })
-)
+app.use(cors({
+    origin: 'https://ecommerce-frontend-amber-two.vercel.app'
+  }));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
