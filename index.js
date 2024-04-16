@@ -16,14 +16,13 @@ connectDB()
 // Middleware
 app.use(express.json())
 
-app.use(
-	cors({
-		origin: 'https://ecommerce-frontend-amber-two.vercel.app',
-		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-		preflightContinue: false,
-		optionsSuccessStatus: 204,
-	})
-)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://ecommerce-frontend-amber-two.vercel.app");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    next();
+});
+
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/categories', categoryRoutes)
