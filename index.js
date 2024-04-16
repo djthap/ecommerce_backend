@@ -18,9 +18,9 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin: 'http://localhost:3000',
+        origin: 'https://ecommerce-frontend-amber-two.vercel.app',
         optionsSuccessStatus: 200,
-        allowedOrigins: ['http://localhost:3000',"https://ecommerce-frontend-amber-two.vercel.app/"],
+        allowedOrigins: ['https://ecommerce-frontend-amber-two.vercel.app',"https://ecommerce-frontend-amber-two.vercel.app/"],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         allowedHeaders: [
             'Content-Type',
