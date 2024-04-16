@@ -18,9 +18,9 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin: 'https://ecommerce-frontend-amber-two.vercel.app',
+        origin: 'http://localhost:3000',
         optionsSuccessStatus: 200,
-        allowedOrigins: ["https://ecommerce-frontend-amber-two.vercel.app"],
+        allowedOrigins: ['http://localhost:3000',"https://ecommerce-frontend-amber-two.vercel.app/"],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         allowedHeaders: [
             'Content-Type',
@@ -32,7 +32,7 @@ app.use(
         credentials: true,
     })
 )
-// Route
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/menuItem', menuItemRoutes);
