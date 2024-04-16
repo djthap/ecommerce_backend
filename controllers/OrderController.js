@@ -141,8 +141,8 @@ const session = await stripe.checkout.sessions.create({
 	payment_method_types: ['card'],
 	line_items: lineItems,
 	mode: 'payment',
-	success_url: `http://localhost:3000/orders/success`,
-	cancel_url: `http://localhost:3000/orders/cancel`,
+	success_url: `https://ecommerce-frontend-amber-two.vercel.app/orders/success`,
+	cancel_url: `https://ecommerce-frontend-amber-two.vercel.app/orders/cancel`,
 })
 console.log(session)
 res.json({id:session.id,data:session})
