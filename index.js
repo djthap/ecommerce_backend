@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const connectDB = require('./db');
 const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
@@ -12,22 +13,25 @@ const app = express();
 // Connect to Database
 connectDB();
 
-// Middleware to set custom CORS headers
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://ecommerce-frontend-amber-two.vercel.app");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    next();
-});
-
-// Middleware to parse JSON bodies
+// Middleware
 app.use(express.json());
 
-// Handle OPTIONS requests
-app.options('*', (req, res) => {
-    res.status(200).end();
-});
-
+app.use(
+    cors({
+        origin: 'https://ecommerce-frontend-amber-two.vercel.app',
+        optionsSuccessStatus: 200,
+        allowedOrigins: ["https://ecommerce-frontend-amber-two.vercel.app"],
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+        allowedHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Access-Control-Allow-Origin',
+            'Access-Control-Allow-Methods',
+            'Access-Control-Allow-Headers',
+        ],
+        credentials: true,
+    })
+)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
